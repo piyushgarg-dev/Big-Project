@@ -43,12 +43,10 @@ app.post("/signup", (req, res) => {
   console.log("New Signup: ", req.body);
   User.find({ email: req.body.email }, (err, user) => {
     if (user.length > 0) {
-      res
-        .status(500)
-        .json({
-          msg: "User Already Exists",
-          class: "alert alert-danger"
-        });
+      res.status(500).json({
+        msg: "User Already Exists",
+        class: "alert alert-danger"
+      });
     } else if (err === null) {
       const user = new User();
       user.fullname = req.body.name;
@@ -60,12 +58,19 @@ app.post("/signup", (req, res) => {
         if (err) {
           res.status(500).json(err);
         } else {
-          res
-            .status(200)
-            .json({
-              msg: "Account Created Successfully",
-              class: "alert alert-success"
-            });
+          const tokenOption = {
+            _id:user._id,
+            fullname:user.fullname,
+            email:user.email,
+            username:user.username
+          }
+          var token = jwt.sign({ tokenOption }, "secretkey");
+          res.status(200).json({
+            msg: "Account Created Successfully",
+            class: "alert alert-success",
+            token
+          });
+          
         }
       });
     } else {

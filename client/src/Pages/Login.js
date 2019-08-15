@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 //import { GoogleLogin } from 'react-google-login';
 import "./css/login.css";
 
-const Login = () => {
+const Login = (props) => {
   useEffect(() => {
     document.title = "Login";
   });
@@ -29,7 +29,10 @@ const Login = () => {
     .then(res=>res.json)
     .then(data=>console.log(data))
   }
-
+  const redirectToSignUp = () =>{
+    window.localStorage.setItem('redirect','signup');
+    window.location.reload();
+  }
   const handelUsernameChange = (e) =>{
     setusername(e.target.value);
   }
@@ -43,9 +46,9 @@ const Login = () => {
 
   return (
     <div>
-    <form onSubmit={handelFormSubmit}>
+    
       <div className="login-page">
-       
+      <form onSubmit={handelFormSubmit}>
           <div className="head">Login</div>
           <div className="input-fields">
             <label>Username:</label>
@@ -68,9 +71,14 @@ const Login = () => {
             <input type="submit" value="Log In" />
            
           </div>
-        
+          </form>
+          <button className="btn btn-success text-center"
+          onClick={redirectToSignUp}
+          >Sign Up</button>
       </div>
-    </form>
+     
+   
+    
     
     </div>
    

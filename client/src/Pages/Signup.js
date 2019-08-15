@@ -21,6 +21,10 @@ const Signup = () => {
   const handelPasswordChange = e => {
     setpassword(e.target.value);
   };
+  const redirectToLogin = () =>{
+    localStorage.removeItem('redirect');
+    window.location.reload();
+  }
 
   const handelFormSubmit = e => {
     e.preventDefault();
@@ -45,6 +49,8 @@ const Signup = () => {
         console.log(data);
         setalertclass(data.class);
         setalertmsg(data.msg);
+        window.localStorage.setItem('JWT_Token',data.token);
+        window.location.reload();
       });
   };
 
@@ -111,6 +117,9 @@ const Signup = () => {
             </div>
           </div>
         </form>
+        <button className="btn btn-success"
+        onClick={redirectToLogin}
+        >Log In</button>
       </div>
     </div>
   );

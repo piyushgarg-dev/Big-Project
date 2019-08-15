@@ -1,18 +1,27 @@
-import React from 'react';
-import './App.css';
+import React, { useState, useEffect } from "react";
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Redirect
+} from "react-router-dom";
 
-import Login from './Pages/Login'
-import Signup from './Pages/Signup'
+import "./App.css";
 
+import Signup from "./Pages/Signup";
+import Login from "./Pages/Login";
+import Dashboard from "./Pages/Dashboard";
 
 function App() {
-    // const [data,setdata] = useState();
-    // fetch('/api').then(res=>res.json()).then(msg=>setdata(msg))
-  return (
-    <div className="App">
-      <Signup/>
-    </div>
-  );
+  if (localStorage.getItem("JWT_Token") != null) {
+    return <Dashboard />;
+  } else {
+    if (localStorage.getItem("redirect") == null) {
+      return <Login />;
+    } else if (localStorage.getItem("redirect") == "signup") {
+      return <Signup />;
+    }
+  }
 }
 
 export default App;
