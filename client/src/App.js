@@ -17,7 +17,12 @@ function App() {
     return <Dashboard />;
   } else {
     if (localStorage.getItem("redirect") == null) {
-      return <Login />;
+      return (
+      <>
+      <Login />
+      
+      </>
+        );
     } else if (localStorage.getItem("redirect") == "signup") {
       return <Signup />;
     }

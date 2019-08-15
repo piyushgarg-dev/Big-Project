@@ -34,6 +34,38 @@ app.use("/api", api);
 app.post("/login", (req, res) => {
   console.log("New Login: ", req.body);
   // { username: 'gargpiyush', password: '123' }
+  User.find({
+    $and:[
+      {username:req.body.username},
+      {password:req.body.password}
+    ]
+  },(err,user)=>{
+    if(err){
+      console.log(err)
+    }
+    else{
+      if(user.length>0){ 
+        console.log(user)
+        const tokenOption = {
+          _id:user._id,
+          fullname:user.fullname,
+          email:user.email,
+          username:user.username
+        };
+        var token = jwt.sign({ tokenOption }, "secretkey");
+        res.status(200).json({
+          msg:'Login Success',
+          class:'alert alert-success text-center',
+          token
+        })}else{
+          res.status(200).json({
+            msg:'Login Failed',
+            class:'alert alert-danger text-center'
+          })
+        }
+     
+    }
+  })
 });
 
 // Route: Signup

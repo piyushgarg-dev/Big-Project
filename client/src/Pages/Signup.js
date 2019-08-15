@@ -117,7 +117,7 @@ const Signup = () => {
             </div>
           </div>
         </form>
-        <button className="btn btn-success"
+        <button className="btn btn-success mybtn"
         onClick={redirectToLogin}
         >Log In</button>
       </div>
