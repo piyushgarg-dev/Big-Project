@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import "./css/signup.css";
 
 const Signup = () => {
-  const [name, setname] = useState('');
-  const [email, setemail] = useState('');
-  const [username, setusername] = useState('');
-  const [password, setpassword] = useState('');
+  const [name, setname] = useState("");
+  const [email, setemail] = useState("");
+  const [username, setusername] = useState("");
+  const [password, setpassword] = useState("");
+  const [alertClass, setalertclass] = useState();
+  const [alertmsg, setalertmsg] = useState();
 
   const handelNameChange = e => {
     setname(e.target.value);
@@ -39,12 +41,25 @@ const Signup = () => {
 
     fetch("/signup", signupOptions)
       .then(res => res.json())
-      .then(data => console.log(data));
+      .then(data => {
+        console.log(data);
+        setalertclass(data.class);
+        setalertmsg(data.msg);
+      });
   };
 
   return (
     <div>
       <div className="signup-page">
+        <div
+          style={{
+            justifyContent: "center",
+            textAlign: "center"
+          }}
+          className={alertClass}
+        >
+          {alertmsg}
+        </div>
         <form onSubmit={handelFormSubmit}>
           <div className="head">Sign Up</div>
           <div className="input-fields">
@@ -55,6 +70,7 @@ const Signup = () => {
                 value={name}
                 onChange={handelNameChange}
                 name="username"
+                required
               />
             </div>
 
@@ -65,6 +81,7 @@ const Signup = () => {
                 value={email}
                 onChange={handelEmailChange}
                 name="username"
+                required
               />
             </div>
 
@@ -75,6 +92,7 @@ const Signup = () => {
                 type="text"
                 onChange={handelUsernameChange}
                 name="username"
+                required
               />
             </div>
 
@@ -85,6 +103,7 @@ const Signup = () => {
                 type="password"
                 onChange={handelPasswordChange}
                 name="username"
+                required
               />
             </div>
             <div className="formgroup">
