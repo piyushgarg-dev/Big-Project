@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+//import { GoogleLogin } from 'react-google-login';
 import "./css/login.css";
 
 const Login = () => {
@@ -41,6 +42,7 @@ const Login = () => {
 
 
   return (
+    <div>
     <form onSubmit={handelFormSubmit}>
       <div className="login-page">
        
@@ -59,13 +61,19 @@ const Login = () => {
              onChange={handelPasswordChange} 
              value={password}
              name="password" 
-             required />
-
+             required 
+            
+             />
+              
             <input type="submit" value="Log In" />
+           
           </div>
         
       </div>
     </form>
+    
+    </div>
+   
   );
 };
 

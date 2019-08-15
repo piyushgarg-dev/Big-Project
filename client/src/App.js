@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 
 import Login from './Pages/Login'
+import Signup from './Pages/Signup'
 
 
 function App() {
@@ -9,7 +10,7 @@ function App() {
     // fetch('/api').then(res=>res.json()).then(msg=>setdata(msg))
   return (
     <div className="App">
-      <Login/>
+      <Signup/>
     </div>
   );
 }
