@@ -1,5 +1,6 @@
 const express = require("express");
 const bodyparser = require('body-parser');
+const jwt = require('jsonwebtoken');
 
 
 const app = express();
@@ -20,7 +21,7 @@ app.use("/api", api);
 // Method: Post
 // Open
 app.post('/login',(req,res)=>{
-  console.log(req.body)
+  console.log('New Login: ',req.body)
   // { username: 'gargpiyush', password: '123' }
 })
 
@@ -28,7 +29,7 @@ app.post('/login',(req,res)=>{
 // Method: Post
 // Open
 app.post('/signup',(req,res)=>{
-
+  console.log('New Signup: ',req.body);
 })
 
 app.listen(PORT, () => {

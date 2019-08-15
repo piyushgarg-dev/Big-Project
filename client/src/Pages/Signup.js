@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import "./css/signup.css";
 
 const Signup = () => {
-  const [name, setname] = useState();
-  const [email, setemail] = useState();
-  const [username, setusername] = useState();
-  const [password, setpassword] = useState();
+  const [name, setname] = useState('');
+  const [email, setemail] = useState('');
+  const [username, setusername] = useState('');
+  const [password, setpassword] = useState('');
 
   const handelNameChange = e => {
     setname(e.target.value);
@@ -20,15 +20,27 @@ const Signup = () => {
     setpassword(e.target.value);
   };
 
-  const handelFormSubmit = (e) =>{
+  const handelFormSubmit = e => {
     e.preventDefault();
     const formdata = {
       name,
       email,
       username,
       password
-    }
-  }
+    };
+
+    const signupOptions = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(formdata)
+    };
+
+    fetch("/signup", signupOptions)
+      .then(res => res.json())
+      .then(data => console.log(data));
+  };
 
   return (
     <div>
@@ -38,7 +50,12 @@ const Signup = () => {
           <div className="input-fields">
             <div className="formgroup">
               <label>Name:</label>
-              <input type="text" value={name} onChange={handelNameChange} name="username" />
+              <input
+                type="text"
+                value={name}
+                onChange={handelNameChange}
+                name="username"
+              />
             </div>
 
             <div className="formgroup">
@@ -54,8 +71,8 @@ const Signup = () => {
             <div className="formgroup">
               <label>Username</label>
               <input
-              value={username}
-                type="email"
+                value={username}
+                type="text"
                 onChange={handelUsernameChange}
                 name="username"
               />
@@ -64,7 +81,7 @@ const Signup = () => {
             <div className="formgroup">
               <label>Password</label>
               <input
-              value={password}
+                value={password}
                 type="password"
                 onChange={handelPasswordChange}
                 name="username"

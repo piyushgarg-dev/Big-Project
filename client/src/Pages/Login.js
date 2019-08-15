@@ -6,8 +6,8 @@ const Login = () => {
   useEffect(() => {
     document.title = "Login";
   });
-  const [username,setusername] = useState();
-  const [password,setpassword] = useState();
+  const [username,setusername] = useState('');
+  const [password,setpassword] = useState('');
 
 
   const handelFormSubmit = (e) =>{
